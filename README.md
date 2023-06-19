@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/hqr5501ehot8rko3?svg=true)](https://ci.appveyor.com/project/sergey-ssf/aqa-patterns)
+
 # Домашнее задание к занятию «2.3. Patterns»
 
 ## Задача №1: заказ доставки карты (изменение даты)
