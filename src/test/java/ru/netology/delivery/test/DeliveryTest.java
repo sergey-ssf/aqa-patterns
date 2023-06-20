@@ -33,7 +33,7 @@ class DeliveryTest {
         // Для заполнения полей формы можно использовать пользователя validUser и строки с датами в переменных
         // firstMeetingDate и secondMeetingDate. Можно также вызывать методы generateCity(locale),
         // generateName(locale), generatePhone(locale) для генерации и получения в тесте соответственно города,
-        // имени и номера телефона без создания пользователя в методе generateUser(String locale) в датагенераторе
+        // имени и номера телефона без создания пользователя в методе generateUser(String locale) в генераторе данных
 
 
         open("http://localhost:9999");
@@ -43,17 +43,17 @@ class DeliveryTest {
         $("[data-test-id='name'] input").setValue(validUser.getName());
         $("[data-test-id='phone'] input").setValue(validUser.getPhone());
         $("[data-test-id='agreement']").click();
-        $(withText("Забронировать")).shouldBe(visible).click();
+        $(withText("Запланировать")).shouldBe(visible).click();
         // TODO:
-        $(".notification__content")
-                .shouldHave(Condition.text("Встреча успешно забронирована на " + firstMeetingDate), Duration.ofSeconds(15))
+        $("[data-test-id='success-notification']")
+                .shouldHave(Condition.text("Встреча успешно запланирована на " + firstMeetingDate), Duration.ofSeconds(15))
                 .shouldBe(Condition.visible);
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.LEFT), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(secondMeetingDate);
-        $(withText("Забронировать")).shouldBe(visible).click();
-
-        $(".notification__content")
-                .shouldHave(Condition.text("Встреча успешно забронирована на " + firstMeetingDate), Duration.ofSeconds(15))
+        $(withText("Запланировать")).shouldBe(visible).click();
+        $("[data-test-id='replan-notification'] button").click();
+        $("[data-test-id='success-notification']")
+                .shouldHave(Condition.text("Встреча успешно запланирована на " + secondMeetingDate), Duration.ofSeconds(15))
                 .shouldBe(Condition.visible);
 
 
